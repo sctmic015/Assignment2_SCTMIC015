@@ -1,16 +1,17 @@
-/** LSBSTApp for sorting LSItmes into a tree*
+/** LSBSTAppTest for sorting LSItmes into a tree*
 * @author SCTMIC015
 */
 
 import java.io.*;
 import java.util.*;
 
+/** Class for the LSBSTAppTest used to test all information from the created subsets */
 public class LSBSTAppTest {
 
    private static BST tree;
    private static int searchCount = 0;
 
-   /** Modified main method to take a subset from the command line and to output the searched for data and opCOunt to a csv file
+   /** Modified main method to take a subset from the command line and to output the searched for data and insert and seacrh to a csv file
    */
 
    public static void main(String[] args) throws IOException {
@@ -27,11 +28,12 @@ public class LSBSTAppTest {
             String line = scan.nextLine();
             String[] splitString = splitString(line);
             LSItems lsItem = new LSItems(splitString[0], splitString[1]);
+            //tree.insertCount = 0;
             tree.insert(lsItem);
-            tree.searchCount = 0;
-            tree.search(lsItem.getInformation());
+            System.out.println(tree.insertCount);
+            //tree.search(lsItem.getInformation());
             try {
-               writeOperationsToCSV(lsItem.getInformation(), tree.searchCount, args[0]);
+               writeInsertOperationsToCSV(lsItem.getInformation(), tree.insertCount, args[0]);
             }
             catch (IOException e) {
                throw new RuntimeException(e);
@@ -43,11 +45,33 @@ public class LSBSTAppTest {
          throw new RuntimeException(e);
       }
 
+      if (args.length>0) {
 
+         Scanner scan2;
 
+         try{
+            scan = new Scanner(file);
+            String searchItem;
+            while (scan.hasNextLine()){
+               String line = scan.nextLine();
+               String[] splitString = splitString(line);
+               searchItem = splitString[0];
+               tree.search(searchItem);
+               try {
+               writeOperationsToCSV(searchItem, tree.searchCount, args[0]);
+               }
+               catch (IOException e) {
+               throw new RuntimeException(e);
+               }
+         }
+
+      }
+      catch(FileNotFoundException e) {
+         throw new RuntimeException(e);
+      }
 
    }
-
+}
    /** Method to split each line in the file so that it can be read into the Array
    */
    public static String[] splitString(String str) {
@@ -69,7 +93,7 @@ public class LSBSTAppTest {
 
    /** Method to print out the Areas of the given the corresponding date, stage and start time.
    * Returns Areas not found if there is no match
-   * @param String information String value for the stage, day and time queried.
+   * @param information String value for the stage, day and time queried.
    */
    public static void printAreas(String information) {
       LSItems searchLS = tree.search(information);
@@ -81,8 +105,8 @@ public class LSBSTAppTest {
 
      /** Method that writes the number of operations used to find an area when given the corresponding stage, day and start time.
      * @throws IOException if fails to write the paramters to file
-     * @param String information String value for the stage, day and time queried.
-     * @param int opCount int value for number of operations used
+     * @param information String value for the stage, day and time queried.
+     * @param opCount int value for number of operations used
      */
      public static void writeOperationsToTxt(String information, int opCount) throws IOException{
        FileWriter fw = null;
@@ -112,7 +136,11 @@ public class LSBSTAppTest {
      }
 	/** Method to write information to a csv file
 	*/
-
+      /** Method that writes the search count into a csv file
+      * @param information String Value for the stage, day and time queried
+      * @param searchCount int value for the value of the operatons we want written into the line of the file.
+      * @param filename String value for the file with which we wish to write to.
+      */
       public static void writeOperationsToCSV(String information, int searchCount, String filename) throws IOException{
         FileWriter fw = null;
         BufferedWriter bw = null;
@@ -141,6 +169,41 @@ public class LSBSTAppTest {
 
         }
       }
+
+   /** Method that writes the insert count into a csv file
+   * @param information String Value for the stage, day and time queried
+   * @param insertCount int value for the value of the operatons we want written into the line of the file.
+   * @param filename String value for the file with which we wish to write to.
+   */
+   public static void writeInsertOperationsToCSV(String information, int insertCount, String filename) throws IOException{
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        PrintWriter pw = null;
+
+
+        try {
+            fw = new FileWriter((filename + "TreeInsert.csv"), true);
+            bw = new BufferedWriter(fw);
+            pw = new PrintWriter(bw);
+
+            //pw.println("Data Structure: Array" + '\n' + "Stage, date and start time tested: "
+              //  + information + '\n' + "Operations counted: "
+                //+ Integer.toString(opCount) + '\n');
+
+            pw.println(information + " , " + Integer.toString(insertCount));
+            pw.flush();
+
+        } finally {
+            try {
+                pw.close();
+                bw.close();
+                fw.close();
+            } catch (IOException io) {// can't do anything }
+            }
+
+        }
+      }
+
 	/** Method to count num of lines of file passed through terminal
 	*/
    public static int lineCounter(String inputFile) throws IOException{

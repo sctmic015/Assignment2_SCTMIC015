@@ -38,7 +38,7 @@ public class LSItems {
 
    /** Method that tests whether the information of two load shedding objects are the same.
    * returns true if they are the same and false if they are not the same.
-   * @param LSItems object.
+   * @param other checks to see if the stage, day and time is the same as the corresponding LSItem.
    */
    public boolean equal(LSItems other) {
       if (this.information.equals(other.getInformation()))
@@ -46,7 +46,7 @@ public class LSItems {
       else
          return false;
    }
-   
+
    public int compareTo(LSItems item) {
       return this.information.compareTo(item.getInformation());
    }

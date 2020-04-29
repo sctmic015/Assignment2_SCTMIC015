@@ -1,0 +1,28 @@
+Data Structure: Tree
+Stage, date and start time tested: 2_18_10
+Operations counted: 29
+
+Data Structure: Tree
+Stage, date and start time tested: 8_18_14
+Operations counted: 184
+
+Data Structure: Tree
+Stage, date and start time tested: 6_18_18
+Operations counted: 124
+
+Data Structure: Tree
+Stage, date and start time tested: 10_11_04
+Operations counted: 3
+
+Data Structure: Tree
+Stage, date and start time tested: 10_18_04
+Operations counted: 3
+
+Data Structure: Tree
+Stage, date and start time tested: 8_18_14
+Operations counted: 184
+
+Data Structure: Tree
+Stage, date and start time tested: 8_18_14
+Operations counted: 184
+

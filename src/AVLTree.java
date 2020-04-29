@@ -1,10 +1,10 @@
-/** implementation of a AVL Tree
+/** Modified version of an AVL Tree
 * @author https://www.sanfoundry.com/java-program-implement-avl-tree/
 */
 
 import java.util.Scanner;
 
-/* Class AVLNode */
+/** Class AVLNode */
 class AVLNode
 {
 
@@ -12,7 +12,7 @@ class AVLNode
   LSItems data;
   int height;
 
-  /* Constructor */
+  /** Constructor */
   public AVLNode()
   {
     this.left = null;
@@ -20,7 +20,7 @@ class AVLNode
     this.data = null;
     this.height = 0;
   }
-  /* Constructor */
+  /** Constructor */
   public AVLNode(LSItems n)
   {
      this.left = null;
@@ -28,7 +28,8 @@ class AVLNode
      this.data = n;
      this.height = 0;
    }
-   
+
+   /** Function to get data from the node */
    public LSItems getData()
      {
          return data;
@@ -36,45 +37,48 @@ class AVLNode
 
 }
 
-/* Class AVLTree */
+/** Class AVLTree */
  public class AVLTree
  {
+	/** Node of AVL tree */
      public AVLNode root;
+	/** count insertions */
      public int insertCount = 0;
+	/** count search */
      public int searchCount;
 
-     /* Constructor */
+     /** Constructor */
      public AVLTree()
      {
          root = null;
      }
-     /* Function to check if tree is empty */
+     /** Function to check if tree is empty */
      public boolean isEmpty()
      {
          return root == null;
      }
-     /* Make the tree logically empty */
+     /** Make the tree logically empty */
      public void makeEmpty()
      {
          root = null;
      }
-     /* Function to insert data */
+     /** Function to insert data */
      public void insert(LSItems data)
      {
          insertCount=0;
          root = insert(data, root);
      }
-     /* Function to get height of node */
+     /** Function to get height of node */
      private int height(AVLNode t )
      {
          return t == null ? -1 : t.height;
      }
-     /* Function to max of left/right node */
+     /** Function to max of left/right node */
      private int max(int lhs, int rhs)
      {
          return lhs > rhs ? lhs : rhs;
      }
-     /* Function to insert data recursively */
+     /** Function to insert data recursively */
      private AVLNode insert(LSItems x, AVLNode t)
      {
          if (t == null)
@@ -85,7 +89,7 @@ class AVLNode
              insertCount++;
              if( height( t.left ) - height( t.right ) == 2 ){
                  insertCount++;
-                 if (x.getInformation().compareTo((t.left.getData()).getInformation()) < 0) 
+                 if (x.getInformation().compareTo((t.left.getData()).getInformation()) < 0)
                      t = rotateWithLeftChild( t );
                  else
                      t = doubleWithLeftChild( t );
@@ -109,7 +113,7 @@ class AVLNode
          t.height = max( height( t.left ), height( t.right ) ) + 1;
          return t;
      }
-     /* Rotate binary tree node with left child */
+     /** Rotate binary tree node with left child */
      private AVLNode rotateWithLeftChild(AVLNode k2)
      {
          AVLNode k1 = k2.left;
@@ -120,7 +124,7 @@ class AVLNode
          return k1;
      }
 
-     /* Rotate binary tree node with right child */
+     /** Rotate binary tree node with right child */
      private AVLNode rotateWithRightChild(AVLNode k1)
      {
          AVLNode k2 = k1.right;
@@ -146,7 +150,7 @@ class AVLNode
          k1.right = rotateWithLeftChild( k1.right );
          return rotateWithRightChild( k1 );
      }
-     /* Functions to count number of nodes */
+     /** Functions to count number of nodes */
      public int countNodes()
      {
          return countNodes(root);
@@ -163,7 +167,7 @@ class AVLNode
              return l;
          }
      }
-     /* Functions to search for an element */
+     /** Functions to search for an element */
      public LSItems search(String val)
      {
          return search(root, val);
@@ -192,21 +196,8 @@ class AVLNode
          return null;
 
      }
-     /* Function for inorder traversal */
-    /* public void inorder()
-     {
-         inorder(root);
-     }
-     private void inorder(AVLNode r)
-     {
-         if (r != null)
-         {
-             inorder(r.left);
-             System.out.print(r.data);
-             inorder(r.right);
-         }
-     }*/
-     
+
+     /** Function for inorder traversal */
      public void inorder(AVLNode root) {
       if (root != null) {
          inorder(root.left);
@@ -215,7 +206,7 @@ class AVLNode
       }
     }
 
-     /* Function for preorder traversal */
+     /** Function for preorder traversal */
      public void preorder()
      {
          preorder(root);
@@ -229,7 +220,7 @@ class AVLNode
              preorder(r.right);
          }
      }
-     /* Function for postorder traversal */
+     /** Function for postorder traversal */
      public void postorder()
      {
          postorder(root);

@@ -5,13 +5,17 @@
 import java.util.*;
 import java.io.*;
 
+/** Class for the LSAVLApp to search for information */
 public class LSAVLApp {
   private static AVLTree tree;
   //private static int searchCount = 0;
  // private static int insertCount = 0;
-
+ /** Main method for reading in Load shedding data set and printing out the operation count for the corresponding
+  stage, day and start time. Prints out a list of all times if no paramters given
+  * @param args the stage, day and start time to search for
+  */
   public static void main(String[] args) throws IOException {
-    File file = new File("boobies.txt");
+    File file = new File("Load_Shedding_All_Areas_Schedule_and_Map.clean.final-1.txt");
 
     tree = new AVLTree();
     Scanner scan;
@@ -68,7 +72,7 @@ public class LSAVLApp {
 
    /** Method to print out the Areas of the given the corresponding date, stage and start time.
    * Returns Areas not found if there is no match
-   * @param String information String value for the stage, day and time queried.
+   * @param information String value for the stage, day and time queried.
    */
    public static void printAreas(String information) {
       LSItems searchLS = tree.search(information);
@@ -84,10 +88,10 @@ public class LSAVLApp {
       tree.inorder(tree.root);
     }
 
-    /** Method that writes the number of operations used to find an area when given the corresponding stage, day and start time.
+    /** Method that writes the number of search operations used to find an area when given the corresponding stage, day and start time.Or to write the number of insertions when inserting the information into the data structure.
      * @throws IOException if fails to write the paramters to file
-     * @param String information String value for the stage, day and time queried.
-     * @param int opCount int value for number of operations used
+     * @param information String value for the stage, day and time queried.
+     * @param searchCount int value for number of operations used
      */
      public static void writeOperationsToTxt(String information, int searchCount) throws IOException{
        FileWriter fw = null;
@@ -95,7 +99,7 @@ public class LSAVLApp {
        PrintWriter pw = null;
 
        try {
-           fw = new FileWriter("opCountTree2.txt", true);
+           fw = new FileWriter("opCountAVLTree.txt", true);
            bw = new BufferedWriter(fw);
            pw = new PrintWriter(bw);
 

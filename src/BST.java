@@ -4,29 +4,33 @@
 
 import java.util.Scanner;
 
+/** Class for the Binary Search Tree*/
 public class BST
  {
+     /** Node of BST */
      public BSTNode root;
+     /** count insertion operations */
      public static int insertCount;
+     /** Count search operations */
      public static int searchCount;
 
-     /* Constructor */
+     /** Constructor */
      public BST()
      {
          root = null;
      }
-     /* Function to check if tree is empty */
+     /** Function to check if tree is empty */
      public boolean isEmpty()
      {
          return root == null;
      }
-     /* Functions to insert data */
+     /** Functions to insert data */
      public void insert(LSItems data)
      {
          insertCount = 0;
          root = insert(root, data);
      }
-     /* Function to insert data recursively */
+     /** Function to insert data recursively */
      private BSTNode insert(BSTNode node, LSItems data)
      {
          if (node == null)
@@ -138,46 +142,46 @@ public class BST
  }
 
 
- /* Class BSTNode */
+ /** Class BSTNode */
  class BSTNode
  {
      BSTNode left, right;
      LSItems data;
 
 
-     /* Constructor */
+     /** Constructor */
      public BSTNode(LSItems n)
      {
          left = null;
          right = null;
          data = n;
      }
-     /* Function to set left node */
+     /** Function to set left node */
      public void setLeft(BSTNode n)
      {
          left = n;
      }
-     /* Function to set right node */
+     /** Function to set right node */
      public void setRight(BSTNode n)
      {
          right = n;
      }
-     /* Function to get left node */
+     /** Function to get left node */
      public BSTNode getLeft()
      {
          return left;
      }
-     /* Function to get right node */
+     /** Function to get right node */
      public BSTNode getRight()
      {
          return right;
      }
-     /* Function to set data to node */
+     /** Function to set data to node */
      public void setData(LSItems d)
      {
          data = d;
      }
-     /* Function to get data from node */
+     /** Function to get data from node */
      public LSItems getData()
      {
          return data;
